@@ -1,0 +1,17 @@
+.home__input {
+  height: 40px;
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  width: 150px;
+  border: none;
+  transition: all ease 0.4s;
+  font-size: 18px;
+  padding: 0 20px;
+  text-align: end;
+  outline: none;
+  margin-left: 2px;
+}
+
+.home__input:focus {
+  width: 300px;
+}
+

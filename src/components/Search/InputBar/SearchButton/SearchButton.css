@@ -1,0 +1,14 @@
+.home__button {
+  font-size: 20px;
+  color: oldlace;
+  height: 40px;
+  background-color: rgb(255, 145, 27);
+  width: 100px;
+  border-radius: 10px;
+  border: none;
+}
+.home__button:hover {
+  background-color: oldlace;
+  color: rgb(255, 145, 27);
+  cursor: pointer;
+}/*# sourceMappingURL=SearchButton.css.map */
