@@ -7,6 +7,7 @@ const index = ({ cityData }) => {
   console.log('cityData', cityData)
   const handleClick = () => {
     alert('click')
+    // Post Logic
   }
 
   return (

@@ -39,7 +39,7 @@ function App() {
     <div className="home__container" style={{ backgroundImage: `url(${weatherImage})` }}>
       <Search onSearch={handleSearch} />
       <div className='main'>
-        <Collection></Collection>
+        <Collection onSearch={handleSearch}></Collection>
         <DisplayPanel weatherData={weatherData} cityData={cityData} />
       </div>
     </div>
