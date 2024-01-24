@@ -10,11 +10,10 @@ import Rain from './assets/Rain.jpg'
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherImage, setWeatherImage] = useState(Clear);
-  const [cityData, setCityData] = useState(null);
+  const [collectionItems, setCollectionItems] = useState(true)
 
-  const handleSearch = (weatherData, cityData) => {
+  const handleSearch = (weatherData) => {
     setWeatherData(weatherData);
-    setCityData(cityData);
     console.log('result: ', weatherData)
     const weather = weatherData.list[0].weather[0].main;
 
@@ -35,12 +34,16 @@ function App() {
     setWeatherImage(bgImg)
   }
 
+  const handleAddCollectionItem = () => {
+    setCollectionItems((prev)=>!prev)
+  }
+
   return (
     <div className="home__container" style={{ backgroundImage: `url(${weatherImage})` }}>
       <Search onSearch={handleSearch} />
       <div className='main'>
-        <Collection onSearch={handleSearch}></Collection>
-        <DisplayPanel weatherData={weatherData} cityData={cityData} />
+        <Collection onSearch={handleSearch} collectionItems={collectionItems}></Collection>
+        <DisplayPanel weatherData={weatherData} onAddCollectionItem={handleAddCollectionItem} />
       </div>
     </div>
   );

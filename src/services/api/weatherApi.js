@@ -14,4 +14,20 @@ async function getWeatherData(cityName, countryName) {
   }
 }
 
-export default getWeatherData;
+async function addCollectionItem(url, data) {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    console.log(responseData)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export {getWeatherData, addCollectionItem};

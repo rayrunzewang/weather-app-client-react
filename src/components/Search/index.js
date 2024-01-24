@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import InputBar from './InputBar/index.js'
 import SearchButton from './InputBar/SearchButton/index.js'
-import getWeatherData from '../../services/api/weatherApi.js'
+import {getWeatherData} from '../../services/api/weatherApi.js'
 import './search.scss'
 
 const Index = ({ onSearch }) => {
@@ -23,18 +23,7 @@ const Index = ({ onSearch }) => {
     if (cityName !== '' && countryName !== '') {
       try {
         const weatherData = await getWeatherData(cityName, countryName);
-        const cityData = {cityName, countryName}
-        
-        // const imgUrl = await getImageUrl(cityName, countryName);
-
-        // city name API logic
-        // const getImageUrl = async () =>{
-        //   const response = await fetch ()
-        //   const result = response.json();
-        //   console.log(result)
-        // }
-
-        onSearch(weatherData, cityData)
+        onSearch(weatherData)
 
       } catch (error) {
         alert(error.message)

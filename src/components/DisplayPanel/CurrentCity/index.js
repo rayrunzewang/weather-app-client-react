@@ -3,11 +3,11 @@ import CityImage from './CityImage'
 import CityTemp from './CityTemp'
 import './CurrentCity.scss'
 
-const index = ({weatherData, cityData}) => {
-  console.log('weatherData', weatherData)
+const index = ({weatherData, onAddCollectionItem}) => {
+  const {city: cityData} = weatherData
   return (
     <div className='Home__current-city'>
-      <CityImage cityData={cityData}></CityImage>
+      <CityImage cityData={cityData} onAddCollectionItem={onAddCollectionItem}></CityImage>
       <CityTemp weatherData={weatherData}></CityTemp>
     </div>
   )

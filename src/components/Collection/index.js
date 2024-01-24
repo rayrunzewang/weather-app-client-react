@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import ToggleButton from './ToggleButton'
 import './collection.scss'
-import getWeatherData from '../../services/api/weatherApi'
+import {getWeatherData} from '../../services/api/weatherApi'
 
-const Index = ({onSearch}) => {
+const Index = ({onSearch, collectionItems}) => {
   const [isCollectionShow, setIsCollectionShow] = useState(true);
   const [cityCollection, setCityCollection] = useState(null);
   const [cityName, setCityName] = useState('')
   const [countryName, setCountryName] = useState('')
 
   useEffect(() => {
+    console.log('collection:', collectionItems);
     const getCollection = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/cities')
@@ -21,7 +22,7 @@ const Index = ({onSearch}) => {
     }
 
     getCollection();
-  }, []);
+  }, [collectionItems]);
 
   const handleToggleClick = () => {
     setIsCollectionShow(!isCollectionShow);

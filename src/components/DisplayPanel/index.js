@@ -2,7 +2,7 @@ import React from 'react'
 import './displayPanel.scss'
 import CurrentCity from './CurrentCity'
 
-const Dashboard = ({ weatherData, cityData }) => {
+const Dashboard = ({ weatherData, onAddCollectionItem }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
 
@@ -10,7 +10,7 @@ const Dashboard = ({ weatherData, cityData }) => {
     <>
       {weatherData && (
         <div className='Home__dashboard'>
-          <CurrentCity weatherData={weatherData} cityData={cityData}>
+          <CurrentCity weatherData={weatherData} onAddCollectionItem={onAddCollectionItem} >
           </CurrentCity>
           <ul className='Home__dashboard-temp-ul'>
             {weatherData &&
@@ -22,12 +22,12 @@ const Dashboard = ({ weatherData, cityData }) => {
           <ul className='Home__dashboard-time-ul'>
             {weatherData && weatherData.list.slice(0, 8).map((item, index) => (
               <li key={index}>
-                {new Date(item.dt_txt).getHours() < 13 ? new Date(item.dt_txt).getHours() + 11 + ' : 00': new Date(item.dt_txt).getHours() - 11 + ' : 00'}
+                {new Date(item.dt_txt).getHours() < 13 ? new Date(item.dt_txt).getHours() + 11 + ' : 00' : new Date(item.dt_txt).getHours() - 11 + ' : 00'}
               </li>
             ))}
           </ul>
         </div>
-      ) 
+      )
       }
     </>
 
