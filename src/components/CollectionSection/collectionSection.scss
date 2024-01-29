@@ -28,26 +28,6 @@
   align-items: center;
 }
 
-.toggle-button {
-  color: white;
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
-  background: rgb(255, 145, 27);
-  transition: transform ease 0.4s;
-  transition-delay: 0.4s;
-}
-
-.button-move-on-container-show {
-  transform: translateX(-40px);
-}
-
-.toggle-button:hover {
-  background-color: white;
-  color: rgb(255, 145, 27);
-  cursor: pointer;
-}
-
 .collection-panel-title {
   text-align: center;
   font-size: 24px;

@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
-import ToggleButton from './Button'
+import ToggleButton from './component/ToggleButton'
+import CollectionList from './component/CollectionList'
 import useToggle from './hook/useToggle.js'
-import { getWeatherData } from '../../services/api/weatherApi'
-import { fetchCityCollection } from './api/fetchCityCollection';
+import { getWeatherData } from '../../services/api/weatherApi.js'
+import { fetchCityCollection } from './api/fetchCityCollection.js';
+import './collectionSection.scss'
 
-import './collection.scss'
-
-const Collection = ({ onSearch, collectionItems, onDelCollectionItem }) => {
+const CollectionSection = ({ onSearch, collectionItems, onDelCollectionItem }) => {
   const [cityName, setCityName] = useState('')
   const [countryName, setCountryName] = useState('')
   const [cityCollection, setCityCollection] = useState(null);
 
   // useToggle custom hook
-  const [isCollectionShow, toggle] = useToggle(true);
+  const [isCollectionVisible, toggle] = useToggle(true);
 
   useEffect(() => {
     const apiurl = 'http://localhost:3001/api/v1/cities'
@@ -70,33 +70,19 @@ const Collection = ({ onSearch, collectionItems, onDelCollectionItem }) => {
       }
     }
     deleteItem(url)
+    
   }
 
   return (
-    <div className={`collection-container ${isCollectionShow && 'collection-container-show'}`}>
-      <div className='collection-panel'>
-        <p className='collection-panel-title'>Collections</p>
-        <ul className='collection-ul'>
-          {cityCollection &&
-            cityCollection.map((item) => {
-              return <li className='collection-li' key={item._id} >
-                <span className='collection-li-item' onClick={(e) => handleCityClick(item)}>{`${item.cityName.toUpperCase()}, ${item.countryName.toUpperCase()}`}</span>
-                <span className='delete-button' onClick={() => handleDelete(item)}>x</span>
-              </li>
-            })
-          }
-        </ul>
+    <div className={`collection-container  ${isCollectionVisible && 'collection-container-show'}`} >
+      <CollectionList cityCollection={cityCollection} onCityClick={handleCityClick} onDeleteClick={handleDelete} />
+
+      <div className='toggle-container'>      {/* reuseable toggle button */}
+        <ToggleButton isCollectionVisible={isCollectionVisible} onClick={toggle}>Collection</ToggleButton >
       </div>
 
-      {/* reuseable button */}
-      <div className='toggle-container'>
-        <ToggleButton className={`toggle-button ${isCollectionShow && 'button-move-on-container-show'}`} children="Collection" onClick={toggle} />
-      </div>
-      {/* --------------- */}
-
-      
     </div>
   )
 }
 
-export default Collection
+export default CollectionSection

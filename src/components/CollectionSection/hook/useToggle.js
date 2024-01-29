@@ -10,10 +10,13 @@ const useToggle = (initialState = true) => {
   return [state, toggle];
 };
 
-// const [isCollectionShow, setIsCollectionShow] = useState(true);
+/* combined:
 
-// const handleToggleClick = () => {
-//   setIsCollectionShow(!isCollectionShow);
-// }
+const [isCollectionShow, setIsCollectionShow] = useState(true);
+
+const handleToggleClick = () => {
+  setIsCollectionShow(!isCollectionShow);
+}
+*/
 
 export default useToggle;
