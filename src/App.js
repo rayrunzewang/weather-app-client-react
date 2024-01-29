@@ -30,6 +30,7 @@ function App() {
     console.log('cityName', e.target.value)
     setCityName(e.target.value);
   };
+
   const handleCountryInputChange = (e) => {
     console.log('countryName', e.target.value)
     setCountryName(e.target.value);
@@ -51,12 +52,25 @@ function App() {
   const handleAddCollectionItem = () => {
     setCollectionItems((prev) => !prev)
   }
-
+  const handleCityClick = async (cityData) => {
+    console.log(cityData)
+    if (cityData.cityName !== '' && cityData.countryName !== '') {
+      try {
+        const result = await getWeatherData(cityData.cityName, cityData.countryName);
+        setWeatherData(result);
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
+      alert('Please input city name')
+    }
+  }
+  
   return (
     <div className="home__container" style={{ backgroundImage: `url(${weatherImage})` }}>
       <SearchBar inputCityRef={inputCityRef} inputCountryRef={inputCountryRef} cityName={cityName} countryName={countryName} handleCityInputChange={handleCityInputChange} handleCountryInputChange={handleCountryInputChange} onSearch={handleSearch} />
       <div className='main'>
-        <CollectionSection onSearch={handleSearch} collectionItems={collectionItems} onDelCollectionItem={handleAddCollectionItem} ></CollectionSection>
+        <CollectionSection onCityClick={handleCityClick} collectionItems={collectionItems} onDelCollectionItem={handleAddCollectionItem} ></CollectionSection>
         <DisplayPanel weatherData={weatherData} onAddCollectionItem={handleAddCollectionItem} />
       </div>
     </div>

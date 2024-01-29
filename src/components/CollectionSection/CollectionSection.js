@@ -6,7 +6,7 @@ import { getWeatherData } from '../../services/api/weatherApi.js'
 import { fetchCityCollection } from './api/fetchCityCollection.js';
 import './collectionSection.scss'
 
-const CollectionSection = ({ onSearch, collectionItems, onDelCollectionItem }) => {
+const CollectionSection = ({ onCityClick, collectionItems, onDelCollectionItem }) => {
   const [cityName, setCityName] = useState('')
   const [countryName, setCountryName] = useState('')
   const [cityCollection, setCityCollection] = useState(null);
@@ -36,8 +36,7 @@ const CollectionSection = ({ onSearch, collectionItems, onDelCollectionItem }) =
         setCityName(item.cityName);
         setCountryName(item.countryName)
         const cityData = { cityName, countryName }
-        console.log('text', weatherData, cityData)
-        onSearch(weatherData, cityData)
+        onCityClick(cityData)
 
       } catch (error) {
         alert(error.message)
