@@ -9,6 +9,7 @@ const CityImage = ({ weatherData, onClick, flagImagUrl }) => {
     <div className='cityImageContainer'>
       <div className='city-info'>
         <h1>{cityData.name.toUpperCase()}</h1>
+        <p>{flagImagUrl}</p>
         <img className='country-flag' src={flagImagUrl} alt="flag" />
       </div>
       <button className='save-button' onClick={onClick} >Add to collection</button>

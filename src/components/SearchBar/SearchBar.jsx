@@ -3,14 +3,15 @@ import SearchButton from './SearchButton/index.js'
 import './searchBar.scss'
 
 const SearchBar = (props) => {
+
   const {
     inputCityRef,
     inputCountryRef,
-    cityName,
-    countryName,
+    cityInfo,
     handleCityInputChange,
     handleCountryInputChange,
     onSearch } = props
+
   const currentDate = new Date().toLocaleString();
 
   return (
@@ -19,8 +20,8 @@ const SearchBar = (props) => {
         <h1 className='home__logo'>Weather</h1>
       </div>
       <div className='home__input-container'>
-        <InputBar ref={inputCityRef} value={cityName} onChange={handleCityInputChange} placeHolder={'City Name'}></InputBar>
-        <InputBar ref={inputCountryRef} value={countryName} onChange={handleCountryInputChange} placeHolder={'Country Code'}></InputBar>
+        <InputBar ref={inputCityRef} value={cityInfo.cityName} onChange={handleCityInputChange} placeHolder={'City Name'}></InputBar>
+        <InputBar ref={inputCountryRef} value={cityInfo.countryName} onChange={handleCountryInputChange} placeHolder={'Country Code'}></InputBar>
       </div>
       <div className='home__button-container'>
         <SearchButton onClick={onSearch} className={'home__button'}>Search</SearchButton>
