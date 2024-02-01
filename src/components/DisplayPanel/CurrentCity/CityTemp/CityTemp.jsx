@@ -1,7 +1,7 @@
 import React from 'react'
 import './cityTemp.scss'
 
-const index = ({ weatherData }) => {
+const CityTemp = ({ weatherData }) => {
   return (
     <div className='display__current-temp'>
       <div>
@@ -16,4 +16,4 @@ const index = ({ weatherData }) => {
   )
 }
 
-export default index
+export default CityTemp

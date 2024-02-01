@@ -1,10 +1,9 @@
 import React from 'react'
-import CityImage from './CityImage'
-import CityTemp from './CityTemp'
+import CityImage from './CityImage/CityImage'
+import CityTemp from './CityTemp/CityTemp'
+import './currentCity.scss'
 
-
-import './CurrentCity.scss'
-const index = ({ onClick, weatherData, flagImagUrl }) => {
+const CurrentCity = ({ onClick, weatherData, flagImagUrl }) => {
 
   return (
     <div className='Home__current-city'>
@@ -14,4 +13,4 @@ const index = ({ onClick, weatherData, flagImagUrl }) => {
   )
 }
 
-export default index
+export default CurrentCity

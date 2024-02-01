@@ -1,7 +1,6 @@
 import React from 'react'
 import './displayPanel.scss'
-import CurrentCity from './CurrentCity'
-
+import CurrentCity from './CurrentCity/CurrentCity'
 
 const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
   const currentDate = new Date();
@@ -9,7 +8,6 @@ const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
   console.log(flagImagUrl)
 
   return (
-    <>
         <div className='Home__dashboard'>
           <CurrentCity weatherData={weatherData} onClick={onClick} flagImagUrl={flagImagUrl} >
           </CurrentCity>
@@ -28,9 +26,6 @@ const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
             ))}
           </ul>
         </div>
-
-    </>
-
   )
 }
 

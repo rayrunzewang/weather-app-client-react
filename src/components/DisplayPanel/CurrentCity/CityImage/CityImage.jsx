@@ -1,7 +1,7 @@
 import React from 'react'
 import './cityImage.scss'
 
-const index = ({ weatherData, onClick, flagImagUrl }) => {
+const CityImage = ({ weatherData, onClick, flagImagUrl }) => {
   const cityData = weatherData.city
   console.log(flagImagUrl)
 
@@ -19,4 +19,4 @@ const index = ({ weatherData, onClick, flagImagUrl }) => {
   )
 }
 
-export default index
+export default CityImage

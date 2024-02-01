@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import DisplayPanel from './components/DisplayPanel';
+import DisplayPanel from './components/DisplayPanel/Dashboard.jsx/index.js';
 import CollectionSection from './components/CollectionSection';
 import SearchBar from './components/SearchBar';
 import backgroundImage from './backgroundImage'
