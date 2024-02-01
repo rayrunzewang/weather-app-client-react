@@ -2,14 +2,14 @@ import React from 'react'
 import './displayPanel.scss'
 import CurrentCity from './CurrentCity/CurrentCity'
 
-const DisplayPanel = ({ onClick, weatherData, flagImagUrl }) => {
+const DisplayPanel = ({ onAdd, weatherData, flagImagUrl }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
   console.log(flagImagUrl)
 
   return (
         <div className='Home__dashboard'>
-          <CurrentCity weatherData={weatherData} onClick={onClick} flagImagUrl={flagImagUrl} >
+          <CurrentCity weatherData={weatherData} onClick={onAdd} flagImagUrl={flagImagUrl} >
           </CurrentCity>
           <ul className='Home__dashboard-temp-ul'>
             {weatherData &&

@@ -14,7 +14,7 @@ async function getWeatherData(cityName, countryName) {
   }
 }
 
-async function addCollectionItem(url, data) {
+async function postAddCity(url, data) {
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -30,4 +30,4 @@ async function addCollectionItem(url, data) {
   }
 }
 
-export {getWeatherData, addCollectionItem};
+export {getWeatherData, postAddCity};
