@@ -1,3 +1,3 @@
-import Dashboard from './Dashboard.js'
+import DisplayPanel from './DisplayPanel'
 
-export default Dashboard
+export default DisplayPanel

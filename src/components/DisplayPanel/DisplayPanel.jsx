@@ -2,7 +2,7 @@ import React from 'react'
 import './displayPanel.scss'
 import CurrentCity from './CurrentCity/CurrentCity'
 
-const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
+const DisplayPanel = ({ onClick, weatherData, flagImagUrl }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
   console.log(flagImagUrl)
@@ -29,4 +29,4 @@ const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
   )
 }
 
-export default Dashboard
+export default DisplayPanel
