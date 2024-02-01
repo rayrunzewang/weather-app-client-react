@@ -3,15 +3,15 @@ import './displayPanel.scss'
 import CurrentCity from './CurrentCity'
 
 
-const Dashboard = ({ cityData, onClick, weatherData, onAddCollectionItem, flagImagUrl }) => {
+const Dashboard = ({ onClick, weatherData, flagImagUrl }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
-
+  console.log(flagImagUrl)
 
   return (
     <>
         <div className='Home__dashboard'>
-          <CurrentCity cityData={cityData} weatherData={weatherData} AddCollectionItem={onAddCollectionItem} onClick={onClick} flagImagUrl={flagImagUrl} >
+          <CurrentCity weatherData={weatherData} onClick={onClick} flagImagUrl={flagImagUrl} >
           </CurrentCity>
           <ul className='Home__dashboard-temp-ul'>
             {weatherData &&

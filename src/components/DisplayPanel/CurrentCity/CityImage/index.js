@@ -1,9 +1,9 @@
 import React from 'react'
 import './cityImage.scss'
 
-const index = ({ cityData, onClick, flagImagUrl }) => {
-
-
+const index = ({ weatherData, onClick, flagImagUrl }) => {
+  const cityData = weatherData.city
+  console.log(flagImagUrl)
 
   return (
     <div className='cityImageContainer'>

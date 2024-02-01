@@ -57,6 +57,7 @@ function App() {
   }
   const handleCityClick = async (cityData) => {
     console.log(cityData)
+    setFlagImagUrl(FLAG_API + cityData.countryName + FLAG_IMAGE)
     if (cityData.cityName !== '' && cityData.countryName !== '') {
       try {
         const result = await getWeatherData(cityData.cityName, cityData.countryName);
@@ -68,8 +69,6 @@ function App() {
       alert('Please input city name')
     }
   }
-
-
 
   const handleAddCollectionItem = () => {
     const { city: cityData } = weatherData
@@ -92,7 +91,7 @@ function App() {
       <div className='main'>
         <CollectionSection onCityClick={handleCityClick} collectionItems={collectionItems} onDelCollectionItem={handleUpdateCollectionItem} ></CollectionSection>
         {weatherData && (
-          <DisplayPanel cityData={cityData} weatherData={weatherData} onClick={handleAddCollectionItem} flagImagUrl={flagImagUrl} />
+          <DisplayPanel weatherData={weatherData} onClick={handleAddCollectionItem} flagImagUrl={flagImagUrl} />
         )
         }
       </div>
