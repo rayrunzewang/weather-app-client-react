@@ -8,12 +8,7 @@
   padding: 10px;
   margin: 0px 20px ;
 
-  &-current-temp {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
 
   &-temp-ul {
     display: flex;
@@ -42,9 +37,7 @@
   }
 }
 
-.home__dashboard--main-info {
-  font-size: 30px;
-}
+
 
 .home__landing {
   width: 600px;

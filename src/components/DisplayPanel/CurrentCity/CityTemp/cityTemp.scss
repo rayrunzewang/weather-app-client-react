@@ -1,4 +1,12 @@
-.Home__dashboard-current-temp{
+.display__current-temp {
   padding: 20px;
   // border: 1px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .display__main-info {
+    font-size: 30px;
+  }
 }

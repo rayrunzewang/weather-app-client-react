@@ -5,7 +5,8 @@ import SearchBar from './components/SearchBar';
 import backgroundImage from './backgroundImage'
 import Clear from './assets/Clear.jpg';
 import { getWeatherData } from './services/api/weatherApi.js'
-
+import { addCollectionItem } from './services/api/weatherApi.js'
+import { FLAG_API, FLAG_IMAGE } from './services/api/flagApi.js'
 
 import './App.scss';
 function App() {
@@ -17,6 +18,8 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherImage, setWeatherImage] = useState(Clear);
   const [collectionItems, setCollectionItems] = useState(true)
+  const [cityData , setCityData] = useState(null)
+  const [flagImagUrl, setFlagImagUrl] = useState("")
 
   useEffect(() => {
     if (weatherData) {
@@ -49,7 +52,7 @@ function App() {
     }
   }
 
-  const handleAddCollectionItem = () => {
+  const handleUpdateCollectionItem = () => {
     setCollectionItems((prev) => !prev)
   }
   const handleCityClick = async (cityData) => {
@@ -65,13 +68,33 @@ function App() {
       alert('Please input city name')
     }
   }
-  
+
+
+
+  const handleAddCollectionItem = () => {
+    const { city: cityData } = weatherData
+    setFlagImagUrl(FLAG_API + cityData.country + FLAG_IMAGE)
+    // Post Logic in api service
+    let url = "http://localhost:3001/api/v1/city";
+    setCityData({
+      cityName: cityData.name,
+      countryName: cityData.country
+    })
+      addCollectionItem(url, cityData);
+    setCollectionItems((prev) => !prev)
+    // 获取城市信息
+    // fetch 图片
+  }
+
   return (
     <div className="home__container" style={{ backgroundImage: `url(${weatherImage})` }}>
       <SearchBar inputCityRef={inputCityRef} inputCountryRef={inputCountryRef} cityName={cityName} countryName={countryName} handleCityInputChange={handleCityInputChange} handleCountryInputChange={handleCountryInputChange} onSearch={handleSearch} />
       <div className='main'>
-        <CollectionSection onCityClick={handleCityClick} collectionItems={collectionItems} onDelCollectionItem={handleAddCollectionItem} ></CollectionSection>
-        <DisplayPanel weatherData={weatherData} onAddCollectionItem={handleAddCollectionItem} />
+        <CollectionSection onCityClick={handleCityClick} collectionItems={collectionItems} onDelCollectionItem={handleUpdateCollectionItem} ></CollectionSection>
+        {weatherData && (
+          <DisplayPanel cityData={cityData} weatherData={weatherData} onClick={handleAddCollectionItem} flagImagUrl={flagImagUrl} />
+        )
+        }
       </div>
     </div>
   );

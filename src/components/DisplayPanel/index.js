@@ -2,15 +2,16 @@ import React from 'react'
 import './displayPanel.scss'
 import CurrentCity from './CurrentCity'
 
-const Dashboard = ({ weatherData, onAddCollectionItem }) => {
+
+const Dashboard = ({ cityData, onClick, weatherData, onAddCollectionItem, flagImagUrl }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
 
+
   return (
     <>
-      {weatherData && (
         <div className='Home__dashboard'>
-          <CurrentCity weatherData={weatherData} onAddCollectionItem={onAddCollectionItem} >
+          <CurrentCity cityData={cityData} weatherData={weatherData} AddCollectionItem={onAddCollectionItem} onClick={onClick} flagImagUrl={flagImagUrl} >
           </CurrentCity>
           <ul className='Home__dashboard-temp-ul'>
             {weatherData &&
@@ -27,8 +28,7 @@ const Dashboard = ({ weatherData, onAddCollectionItem }) => {
             ))}
           </ul>
         </div>
-      )
-      }
+
     </>
 
   )
