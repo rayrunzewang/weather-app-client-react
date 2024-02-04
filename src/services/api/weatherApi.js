@@ -1,4 +1,4 @@
-async function getWeatherData(cityName, countryName) {
+async function getWeather(cityName, countryName) {
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName},${countryName}&appid=052b37caae519c28d90953b5a30182ca`);
     if (response.ok) {
@@ -25,9 +25,10 @@ async function postAddCity(url, data) {
     });
     const responseData = await response.json();
     console.log(responseData)
+    return responseData
   } catch (error) {
     console.error(error)
   }
 }
 
-export {getWeatherData, postAddCity};
+export {getWeather, postAddCity};

@@ -4,7 +4,7 @@ import './toggleButton.scss'
 const ToggleButton = ({ isCollectionVisible, onClick, children }) => {
   return (
     <button
-      className={`toggle-button ${isCollectionVisible && 'button-collection-visible'}`}
+      className={`collection__toggle-button ${isCollectionVisible && 'collection__toggle-button--collection-visible'}`}
       onClick={onClick}
     >{children}</button>
   )

@@ -1,4 +1,4 @@
-export const fetchCityCollection = async (url) => {
+export const fetchCollection = async (url) => {
   try {
     const response = await fetch(url);
     const result = await response.json();

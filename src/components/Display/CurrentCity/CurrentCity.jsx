@@ -1,6 +1,6 @@
 import React from 'react'
-import CityImage from './CityImage/CityImage'
-import CityTemp from './CityTemp/CityTemp'
+import CityImage from './CityImage'
+import CityTemp from './CityTemp'
 import './currentCity.scss'
 
 const CurrentCity = ({ onClick, weatherData, flagImagUrl }) => {

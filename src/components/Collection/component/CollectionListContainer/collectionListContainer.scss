@@ -1,0 +1,41 @@
+.collection__list-container {
+  width: 210px;
+  height: 100%;
+
+  .collection__title {
+    text-align: center;
+    font-size: 24px;
+    margin: 5px 0;
+    padding: 20px;
+    border-bottom: 1px dashed white;
+  }
+
+  .collection__ul {
+    font-size: 16px;
+    margin-top: 20px;
+
+    .collection__list {
+      min-width: 150px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px dashed white;
+
+      .collection__item:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .collection__item-delete-button {
+        font-size: 15px;
+        color: white;
+      }
+
+      .collection__item-delete-button:hover {
+        cursor: pointer;
+        color: red;
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import React from 'react'
-import './displayPanel.scss'
-import CurrentCity from './CurrentCity/CurrentCity'
+import './display.scss'
+import CurrentCity from './CurrentCity'
 
-const DisplayPanel = ({ onAdd, weatherData, flagImagUrl }) => {
+const Display = ({ onAdd, weatherData, flagImagUrl }) => {
   const currentDate = new Date();
   const hours = currentDate.getHours();
   console.log(flagImagUrl)
@@ -29,4 +29,4 @@ const DisplayPanel = ({ onAdd, weatherData, flagImagUrl }) => {
   )
 }
 
-export default DisplayPanel
+export default Display

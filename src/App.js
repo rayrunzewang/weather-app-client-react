@@ -1,28 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import DisplayPanel from './components/DisplayPanel';
-import CollectionSection from './components/CollectionSection';
+import Display from './components/Display';
+import Collection from './components/Collection';
 import SearchBar from './components/SearchBar';
 import backgroundImage from './backgroundImage'
 import Clear from './assets/Clear.jpg';
-import { getWeatherData } from './services/api/weatherApi.js'
+import { getWeather } from './services/api/weatherApi.js'
 import { postAddCity } from './services/api/weatherApi.js'
 import { FLAG_API, FLAG_IMAGE } from './services/api/flagApi.js'
-import { fetchCityCollection } from './components/CollectionSection/api/fetchCityCollection.js';
+import { fetchCollection } from './services/api/fetchCollection.js';
+import deleteCity from './services/api/deleteCity.js'
 
 
 import './App.scss';
 function App() {
   const inputCityRef = useRef(null);
   const inputCountryRef = useRef(null);
-
-
   const [cityInfo, setCityInfo] = useState({})
-
-
-
+  const [collectionChange, setCollectionChange] = useState(0)
   const [weatherData, setWeatherData] = useState(null);
   const [weatherImage, setWeatherImage] = useState(Clear);
-  const [collectionItems, setCollectionItems] = useState([])
+  const [cityCollection, setCityCollection] = useState([])
   const [cityData, setCityData] = useState(null)
   const [flagImagUrl, setFlagImagUrl] = useState("")
 
@@ -46,22 +43,28 @@ function App() {
 
     const getCollection = async (url) => {
       try {
-        const result = await fetchCityCollection(url);
-        setCollectionItems(result);
+        const result = await fetchCollection(url);
+        setCityCollection(result);
       } catch (error) {
         console.error(error);
       }
     };
 
     getCollection(apiurl);
-  }, []);
+  }, [collectionChange]);
 
   useEffect(() => {
-    if (cityData) {
-      let url = "http://localhost:3001/api/v1/city";
-      postAddCity(url, cityData);
-      // setCollectionItems((prev) => !prev)
+    const addCity = async () => {
+      if (cityData) {
+        let url = "http://localhost:3001/api/v1/city";
+        const postCityResult = await postAddCity(url, cityData);
+        console.log(postCityResult)
+        if(postCityResult){
+          setCollectionChange((prev) => prev + 1)
+        }
+      }
     }
+    addCity()
   }, [cityData]) // 添加城市数据 Collection
 
   const handleAddCity = () => {
@@ -71,7 +74,6 @@ function App() {
       cityName: weatherData.city.name,
       countryName: weatherData.city.country
     })
-
     // 获取城市信息
     // fetch 图片
   }
@@ -84,11 +86,10 @@ function App() {
     setCityInfo({ ...cityInfo, countryName: e.target.value });
   };  // ok
 
-
   const handleSearch = async () => {
     if (cityInfo.cityName !== '' && cityInfo.countryName !== '') {
       try {
-        const result = await getWeatherData(cityInfo.cityName, cityInfo.countryName);
+        const result = await getWeather(cityInfo.cityName, cityInfo.countryName);
         setWeatherData(result);
       } catch (error) {
         console.error(error)
@@ -96,16 +97,13 @@ function App() {
     } else {
       alert('Please input city name')
     }
-  }
+  } // ok
 
-  const handleUpdateCollectionItem = () => {
-    setCollectionItems((prev) => !prev)
-  }
   const handleCityClick = async (city) => {
     console.log(city)
     if (city.cityName !== '' && city.countryName !== '') {
       try {
-        const result = await getWeatherData(city.cityName, city.countryName);
+        const result = await getWeather(city.cityName, city.countryName);
         setWeatherData(result);
       } catch (error) {
         console.error(error)
@@ -113,37 +111,20 @@ function App() {
     } else {
       alert('Please input city name')
     }
-  }
+  } // ok
 
-
-
-  const handleDelete = (item) => {
+  const handleDelete = async (item) => {
     const id = item._id
-
     const url = "http://localhost:3001/api/v1/city/" + id
-    async function deleteItem(url) {
-      try {
-        const response = await fetch(url, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          }
-        })
 
-        if (response.status === 204) {
-          console.log("Item deleted")
-          // handleUpdateCollectionItem()
-        }
-      } catch (error) {
-        console.error({ error })
-      }
+    const deleteResult = await deleteCity(url)
+
+    if (deleteResult.success) {
+      setCollectionChange((prev) => prev + 1)
+    } else {
+      console.error(deleteResult.error);
     }
-    deleteItem(url)
-    
-  }
-
-
-  console.log(collectionItems)
+  } // ok
 
   return (
     <div className="home__container" style={{ backgroundImage: `url(${weatherImage})` }}>
@@ -152,10 +133,10 @@ function App() {
 
       <div className='main'>
 
-        <CollectionSection onCityClick={handleCityClick} collectionItems={collectionItems}  onCityDelete={handleDelete} ></CollectionSection>
+        <Collection onCityClick={handleCityClick} cityCollection={cityCollection} onCityDelete={handleDelete} ></Collection>
 
         {weatherData && (
-          <DisplayPanel weatherData={weatherData} onAdd={handleAddCity} flagImagUrl={flagImagUrl} />
+          <Display weatherData={weatherData} onAdd={handleAddCity} flagImagUrl={flagImagUrl} />
         )
         }
 
