@@ -1,4 +1,4 @@
-.home__input {
+.search-bar__input {
   height: 40px;
   background-color: rgba($color: #ffffff, $alpha: 0.9);
   width: 150px;
@@ -11,7 +11,7 @@
   margin-left: 2px;
 }
 
-.home__input:focus {
+.search-bar__input:focus {
   width: 300px;
 }
 

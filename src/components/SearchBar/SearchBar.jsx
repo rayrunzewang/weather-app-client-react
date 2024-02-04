@@ -1,5 +1,5 @@
-import InputBar from './InputBar/index.js'
-import SearchButton from './SearchButton/index.js'
+import Input from './Input'
+import SearchButton from './SearchButton'
 import './searchBar.scss'
 
 const SearchBar = (props) => {
@@ -15,19 +15,19 @@ const SearchBar = (props) => {
   const currentDate = new Date().toLocaleString();
 
   return (
-    <div className='home__search'>
+    <div className='search-bar'>
       <div>
-        <h1 className='home__logo'>Weather</h1>
+        <h1 className='search-bar__logo'>Weather</h1>
       </div>
-      <div className='home__input-container'>
-        <InputBar ref={inputCityRef} value={cityInfo.cityName} onChange={handleCityInputChange} placeHolder={'City Name'}></InputBar>
-        <InputBar ref={inputCountryRef} value={cityInfo.countryName} onChange={handleCountryInputChange} placeHolder={'Country Code'}></InputBar>
+      <div className='search-bar__input-container'>
+        <Input ref={inputCityRef} value={cityInfo.cityName} onChange={handleCityInputChange} placeHolder={'City Name'}></Input>
+        <Input ref={inputCountryRef} value={cityInfo.countryName} onChange={handleCountryInputChange} placeHolder={'Country Code'}></Input>
       </div>
-      <div className='home__button-container'>
-        <SearchButton onClick={onSearch} className={'home__button'}>Search</SearchButton>
+      <div className='search-bar__button-container'>
+        <SearchButton onClick={onSearch}>Search</SearchButton>
       </div>
       <div>
-        <p className='home__clock'>{currentDate}</p>
+        <p className='search-bar__clock'>{currentDate}</p>
       </div>
     </div>
   )

@@ -60,7 +60,7 @@ function App() {
     if (cityData) {
       let url = "http://localhost:3001/api/v1/city";
       postAddCity(url, cityData);
-      setCollectionItems((prev) => !prev)
+      // setCollectionItems((prev) => !prev)
     }
   }, [cityData]) // 添加城市数据 Collection
 
@@ -132,7 +132,7 @@ function App() {
 
         if (response.status === 204) {
           console.log("Item deleted")
-          handleUpdateCollectionItem()
+          // handleUpdateCollectionItem()
         }
       } catch (error) {
         console.error({ error })

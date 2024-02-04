@@ -1,10 +1,10 @@
 import React from 'react'
 import './SearchButton.scss'
 
-const SearchButton = ({onClick, className, children}) => {
+const SearchButton = ({ onClick, children }) => {
 
   return (
-    <button onClick={onClick} className={className}>{children}</button>
+    <button onClick={onClick} className='search-bar__button'>{children}</button>
   )
 }
 
