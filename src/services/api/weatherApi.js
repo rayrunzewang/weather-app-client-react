@@ -1,6 +1,8 @@
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+
 async function getWeather(cityName, countryName) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName},${countryName}&appid=052b37caae519c28d90953b5a30182ca`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName},${countryName}&appid=${WEATHER_API_KEY}`);
     if (response.ok) {
       const data = await response.json();
       return data;

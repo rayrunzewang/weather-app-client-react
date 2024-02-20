@@ -25,6 +25,5 @@ export const useFetchCurrentWeather = () => {
       alert('Please input city name')
     }
   }
-  console.log(currentWeather)
   return { currentWeather, setCurrentCity, currentCity, handleCityInputChange, handleCountryInputChange, handleSearch }
 }
