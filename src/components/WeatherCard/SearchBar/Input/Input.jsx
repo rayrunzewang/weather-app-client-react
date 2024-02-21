@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Input.scss'
 
-const Input = React.forwardRef((props, ref) => {
+const Input = (props) => {
+  const [value, setValue] = useState('')
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }
+
+  props.onChange(value)
+
   return (
-      <input  className='search-bar__input' ref={ref} type="text" {...props} />
+    <input className='search-bar__input' type="text" value={value} onChange={handleChange} />
   )
-})
+}
 
 export default Input

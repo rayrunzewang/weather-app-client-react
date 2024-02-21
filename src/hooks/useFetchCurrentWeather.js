@@ -1,23 +1,14 @@
 import { useState } from 'react';
 import { getWeather } from '../services/api/weatherApi.js';
 
-export const useFetchCurrentWeather = () => {
-  const [currentCity, setCurrentCity] = useState({})
-  const [currentWeather, setCurrentWeather] = useState(null);
-
-  const handleCityInputChange = (e) => {
-    setCurrentCity({ ...currentCity, cityName: e.target.value });
-  };
-
-  const handleCountryInputChange = (e) => {
-    setCurrentCity({ ...currentCity, countryName: e.target.value });
-  };
+export const useFetchCurrentWeather = (location) => {
+  const [Weather, setWeather] = useState(null);
 
   const handleSearch = async () => {
-    if (currentCity.cityName !== '' && currentCity.countryName !== '') {
+    if (location.city !== '' && location.country !== '') {
       try {
-        const result = await getWeather(currentCity.cityName, currentCity.countryName);
-        setCurrentWeather(result);
+        const result = await getWeather(location.city, location.country);
+        setWeather(result);
       } catch (error) {
         console.error(error)
       }
@@ -25,5 +16,5 @@ export const useFetchCurrentWeather = () => {
       alert('Please input city name')
     }
   }
-  return { currentWeather, setCurrentCity, currentCity, handleCityInputChange, handleCountryInputChange, handleSearch }
+  return { Weather, handleSearch }
 }
