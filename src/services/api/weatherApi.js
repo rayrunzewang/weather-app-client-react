@@ -1,13 +1,12 @@
-const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
-async function getWeather(cityName, countryName) {
+async function getWeather(city) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${cityName},${countryName}&appid=${WEATHER_API_KEY}`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${city}&appid=${process.env.REACT_APP_API_KEY}`);
     if (response.ok) {
       const data = await response.json();
       return data;
     } else {
-      throw new Error(`Weather API request failed for ${cityName}: ${response.statusText}`);
+      throw new Error(`Weather API request failed for ${city}: ${response.statusText}`);
 
     }
   } catch (error) {

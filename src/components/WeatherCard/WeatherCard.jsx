@@ -7,26 +7,23 @@ import SearchBar from './SearchBar';
 import { useFetchCurrentWeather } from '../../hooks/useFetchCurrentWeather.js';
 // import { getWeather } from '../../services/api/weatherApi.js'
 // import { useUpdateImage } from '../../hooks/useUpdateImage.js'
-// import { useFetchFlag } from '../../hooks/useFetchFlag.js'
+import { useFetchFlag } from '../../hooks/useFetchFlag.js'
 // import deleteCity from '../../services/api/deleteCity.js'
 import '../../App.scss';
 
 function WeatherCard() {
   // const [collectionChange, setCollectionChange] = useState(0)
   // const [cityCollection, setCityCollection] = useState([])
-  // const [cityData, setCityData] = useState(null)
+  const [addLocation, setAddLocation] = useState(null)
 
-  const [ location, setLocation ] = useState();
-  const { Weather, handleSearch } = useFetchCurrentWeather(location);
+  const [ location, setLocation ] = useState({});
+  const { weather, handleSearch } = useFetchCurrentWeather(location);
   const handleInputChange = (input) => {
-    setLocation({
-      ...location,
-      ...input
-    });
+    setLocation(input);
   }
 
   // const { weatherImage } = useUpdateImage(currentWeather);
-  // const { flagImagUrl } = useFetchFlag(currentWeather);
+  const { flagImagUrl } = useFetchFlag(weather);
 
   // useEffect(() => {
   //   const apiurl = 'http://localhost:3001/api/v1/cities'
@@ -57,16 +54,15 @@ function WeatherCard() {
   //   addCity()
   // }, [cityData]) // 添加城市数据 Collection
 
-  // const handleAddCity = () => {
-  //   console.log("Click", currentWeather)
-  //   // Post Logic in api service
-  //   setCityData({
-  //     cityName: currentWeather.city.name,
-  //     countryName: currentWeather.city.country
-  //   })
-  //   // 获取城市信息
-  //   // fetch 图片
-  // }
+  const handleAddCity = () => {
+    // Post Logic in api service
+    setAddLocation({
+      city: weather.city.name,
+      country: weather.city.country
+    })
+    // 获取城市信息
+    // fetch 图片
+  }
 
   // const handleCityClick = async (city) => {
   //   console.log(city)
@@ -99,10 +95,10 @@ function WeatherCard() {
     <div>
       <SearchBar onInputChange={handleInputChange} onSearch={handleSearch} />
       <div className='main'>
-        {/* <Collection onCityClick={handleCityClick} cityCollection={cityCollection} onCityDelete={handleDelete} ></Collection>
-        {currentWeather && (
-          <Display weatherData={currentWeather} onAdd={handleAddCity} flagImagUrl={flagImagUrl} />
-        )} */}
+        {/* <Collection onCityClick={handleCityClick} cityCollection={cityCollection} onCityDelete={handleDelete} ></Collection> */}
+        {weather && (
+          <Display weatherData={weather} onAdd={handleAddCity} flagImagUrl={flagImagUrl} />
+        )}
       </div>
     </div>
   );

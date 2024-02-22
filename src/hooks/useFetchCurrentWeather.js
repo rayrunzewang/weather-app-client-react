@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { getWeather } from '../services/api/weatherApi.js';
 
 export const useFetchCurrentWeather = (location) => {
-  const [Weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState(null);
 
   const handleSearch = async () => {
-    if (location.city !== '' && location.country !== '') {
+    if (location) {
       try {
-        const result = await getWeather(location.city, location.country);
+        const result = await getWeather(location);
         setWeather(result);
       } catch (error) {
         console.error(error)
@@ -16,5 +16,5 @@ export const useFetchCurrentWeather = (location) => {
       alert('Please input city name')
     }
   }
-  return { Weather, handleSearch }
+  return { weather, handleSearch }
 }
