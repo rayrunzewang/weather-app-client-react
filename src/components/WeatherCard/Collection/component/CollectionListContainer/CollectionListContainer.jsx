@@ -1,18 +1,25 @@
+import LoadingScreen from '../../../../loadingScreen/LoadingScreen'
 import './collectionListContainer.scss'
 
-const CollectionListContainer = ({ cityCollection, onCityClick, onCityDelete }) => {
+const CollectionListContainer = ({ isLoading, collection, onItemClick, onCityDelete }) => {
   return (
     <div className='collection__list-container'>
-      <p className='collection__title'>Collections</p>
+      <h3 className='collection__title'>Collection</h3>
       <ul className='collection__ul'>
-        {cityCollection &&
-          cityCollection.map((city) => {
-            return <li className='collection__list' key={city._id} >
-              <span className='collection__item' onClick={() => onCityClick(city)}>{`${city.cityName.toUpperCase()}, ${city.countryName.toUpperCase()}`}</span>
-              <span className='collection__item-delete-button' onClick={() => onCityDelete(city)}>x</span>
-            </li>
-          })
-        }
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          collection.length === '0' ? (
+            <p>Not Collection yet...</p>
+          ) : (
+            collection.map((city) => {
+              return <li className='collection__list' key={city._id} >
+                <span className='collection__item' onClick={() => onItemClick(city)}>{`${city.city.toUpperCase()}, ${city.country.toUpperCase()}`}</span>
+                <span className='collection__item-delete-button' onClick={() => onCityDelete(city)}>x</span>
+              </li>
+            })
+          )
+        )}
       </ul>
     </div>
   )

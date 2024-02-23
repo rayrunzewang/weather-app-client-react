@@ -1,82 +1,77 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Display from './Display';
 import Collection from './Collection';
 import SearchBar from './SearchBar';
-// import { postAddCity } from '../../services/api/weatherApi.js'
-// import { fetchCollection } from '../../services/api/fetchCollection.js';
+import { postAddCity } from '../../services/api/weatherApi.js'
+import { fetchCollection } from '../../services/api/fetchCollection.js';
 import { useFetchCurrentWeather } from '../../hooks/useFetchCurrentWeather.js';
-// import { getWeather } from '../../services/api/weatherApi.js'
 // import { useUpdateImage } from '../../hooks/useUpdateImage.js'
 import { useFetchFlag } from '../../hooks/useFetchFlag.js'
 // import deleteCity from '../../services/api/deleteCity.js'
 import '../../App.scss';
 
 function WeatherCard() {
-  // const [collectionChange, setCollectionChange] = useState(0)
-  // const [cityCollection, setCityCollection] = useState([])
-  const [addLocation, setAddLocation] = useState(null)
+  const [inputValue, setInputValue] = useState('');
+  const [location, setLocation] = useState('');
+  const [isCollectionLoading, setIsCollectionLoading] = useState(false);
+  const [collection, setCollection] = useState([]);
+  const { weather, isLoading } = useFetchCurrentWeather(location);
+  const { flagImagUrl } = useFetchFlag(weather);
 
-  const [ location, setLocation ] = useState({});
-  const { weather, handleSearch } = useFetchCurrentWeather(location);
-  const handleInputChange = (input) => {
-    setLocation(input);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   }
 
   // const { weatherImage } = useUpdateImage(currentWeather);
-  const { flagImagUrl } = useFetchFlag(weather);
+  useEffect(() => {
+    const apiurl = 'http://localhost:3001/api/v1/cities'
 
-  // useEffect(() => {
-  //   const apiurl = 'http://localhost:3001/api/v1/cities'
+    const getCollection = async (url) => {
+        setIsCollectionLoading(true)
+        const result = await fetchCollection(url);
+        setCollection(result);
+        setIsCollectionLoading(false)
+    };
 
-  //   const getCollection = async (url) => {
-  //     try {
-  //       const result = await fetchCollection(url);
-  //       setCityCollection(result);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+    getCollection(apiurl);
+  }, []);
 
-  //   getCollection(apiurl);
-  // }, [collectionChange]);
+  const handleSearch = () => {
+    setLocation(inputValue);
+    setInputValue('')
+  }
 
-  // useEffect(() => {
-  //   const addCity = async () => {
-  //     if (cityData) {
-  //       let url = "http://localhost:3001/api/v1/citys";
-  //       const postCityResult = await postAddCity(url, cityData);
-  //       console.log(postCityResult)
-  //       if (postCityResult) {
-  //         setCollectionChange((prev) => prev + 1)
-  //       }
-  //     }
-  //   }
-  //   addCity()
-  // }, [cityData]) // 添加城市数据 Collection
-
-  const handleAddCity = () => {
+  const handleAddLocation = () => {
     // Post Logic in api service
-    setAddLocation({
-      city: weather.city.name,
-      country: weather.city.country
-    })
+    const addLocation = async () => {
+      if (weather.city.name && weather.city.country) {
+        let url = "http://localhost:3001/api/v1/cities";
+        const response = await postAddCity(url, {
+          city: weather.city.name,
+          country: weather.city.country
+        });
+        if (response) {
+          const apiurl = 'http://localhost:3001/api/v1/cities'
+          const getCollection = async (url) => {
+              setIsCollectionLoading(true)
+              const result = await fetchCollection(url);
+              setCollection(result);
+              setIsCollectionLoading(false)
+          };
+
+          getCollection(apiurl);
+        }
+      }
+    }
+    
+    addLocation()
     // 获取城市信息
     // fetch 图片
   }
 
-  // const handleCityClick = async (city) => {
-  //   console.log(city)
-  //   if (city.cityName !== '' && city.countryName !== '') {
-  //     try {
-  //       const result = await getWeather(city.cityName, city.countryName);
-  //       setCurrentCity(result);
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   } else {
-  //     alert('Please input city name')
-  //   }
-  // }
+  const handleCollectionItemClick = async (city) => {
+    setLocation(city.city)
+  }
 
   // const handleDelete = async (item) => {
   //   const id = item._id
@@ -89,16 +84,14 @@ function WeatherCard() {
   //   } else {
   //     console.error(deleteResult.error);
   //   }
-  // } // ok
+  // } 
 
   return (
     <div>
-      <SearchBar onInputChange={handleInputChange} onSearch={handleSearch} />
+      <SearchBar inputValue={inputValue} onInputChange={handleInputChange} onSearch={handleSearch} />
       <div className='main'>
-        {/* <Collection onCityClick={handleCityClick} cityCollection={cityCollection} onCityDelete={handleDelete} ></Collection> */}
-        {weather && (
-          <Display weatherData={weather} onAdd={handleAddCity} flagImagUrl={flagImagUrl} />
-        )}
+        <Collection isLoading={isCollectionLoading} onItemClick={handleCollectionItemClick} collection={collection} /* onCityDelete={handleDelete}  */></Collection>
+        <Display isLoading={isLoading} weather={weather} onAdd={handleAddLocation} flagImagUrl={flagImagUrl} />
       </div>
     </div>
   );

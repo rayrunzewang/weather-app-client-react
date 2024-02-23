@@ -13,6 +13,8 @@
   .collection__ul {
     font-size: 16px;
     margin-top: 20px;
+    height: 75%;
+    overflow: auto;
 
     .collection__list {
       min-width: 150px;

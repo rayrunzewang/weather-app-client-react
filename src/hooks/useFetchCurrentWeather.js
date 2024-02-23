@@ -1,20 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getWeather } from '../services/api/weatherApi.js';
 
 export const useFetchCurrentWeather = (location) => {
   const [weather, setWeather] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSearch = async () => {
-    if (location) {
-      try {
-        const result = await getWeather(location);
-        setWeather(result);
-      } catch (error) {
-        console.error(error)
+  useEffect(() => {
+    const search = async () => {
+      if (location) {
+        try {
+          setIsLoading(true)
+          const result = await getWeather(location);
+          setWeather(result);
+          setIsLoading(false)
+        } catch (error) {
+          console.error(error)
+        }
       }
-    } else {
-      alert('Please input city name')
     }
-  }
-  return { weather, handleSearch }
+    search()
+  }, [location])
+
+  return { weather, isLoading }
 }
