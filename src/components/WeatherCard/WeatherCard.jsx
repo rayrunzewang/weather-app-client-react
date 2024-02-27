@@ -26,19 +26,20 @@ function WeatherCard() {
   useEffect(() => {
     const apiurl = 'http://localhost:3001/api/v1/cities'
 
+    // TODO: then
     const getCollection = async (url) => {
-      setIsCollectionLoading(true)
+      setIsCollectionLoading(true);
       const result = await fetchCollection(url);
       setCollection(result);
-      setIsCollectionLoading(false)
+      setIsCollectionLoading(false);
     };
 
     getCollection(apiurl);
   }, []);
 
-  const handleSearch = () => {
+  const searchWeather = () => {
     setLocation(inputValue);
-    setInputValue('')
+    setInputValue('');
   }
 
   const handleAddLocation = () => {
@@ -53,10 +54,10 @@ function WeatherCard() {
         if (response) {
           const apiurl = 'http://localhost:3001/api/v1/cities'
           const getCollection = async (url) => {
-            setIsCollectionLoading(true)
+            setIsCollectionLoading(true);
             const result = await fetchCollection(url);
             setCollection(result);
-            setIsCollectionLoading(false)
+            setIsCollectionLoading(false);
           };
 
           getCollection(apiurl);
@@ -70,22 +71,22 @@ function WeatherCard() {
   }
 
   const handleCollectionItemClick = async (city) => {
-    setLocation(city.city)
+    setLocation(city.city);
   }
 
   const handleDelete = async (item) => {
-    const id = item._id
-    const url = "http://localhost:3001/api/v1/citys/" + id
+    const id = item._id;
+    const url = "http://localhost:3001/api/v1/citys/" + id;
 
-    const Result = await deleteCity(url)
+    const Result = await deleteCity(url);
 
     if (Result.success) {
       const apiurl = 'http://localhost:3001/api/v1/cities'
       const getCollection = async (url) => {
-        setIsCollectionLoading(true)
+        setIsCollectionLoading(true);
         const result = await fetchCollection(url);
         setCollection(result);
-        setIsCollectionLoading(false)
+        setIsCollectionLoading(false);
       };
 
       getCollection(apiurl);
@@ -99,7 +100,7 @@ function WeatherCard() {
       <SearchBar
         inputValue={inputValue}
         onInputChange={handleInputChange}
-        onSearch={handleSearch}
+        onSearch={searchWeather}
       />
       <div className='main'>
         <Collection
