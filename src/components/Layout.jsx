@@ -2,7 +2,7 @@ import { Outlet, NavLink, Routes, Route } from 'react-router-dom';
 import App from '../App';
 import './layout.scss'
 
-const Layout = () => {
+export const Layout = () => {
   const currentDate = new Date().toLocaleString();
 
   return (
@@ -40,5 +40,3 @@ const Layout = () => {
     </div>
   )
 }
-
-export default Layout;

@@ -1,4 +1,4 @@
-export default async function deleteCity(url) {
+export async function deleteCity(url) {
   try {
     const response = await fetch(url, {
       method: "DELETE",

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Display from './Display';
 import Collection from './Collection';
-import SearchBar from './SearchBar';
+import { SearchBar } from './SearchBar';
 import { postAddCity } from '../../services/api/weatherApi.js'
 import { fetchCollection } from '../../services/api/fetchCollection.js';
 import { useFetchCurrentWeather } from '../../hooks/useFetchCurrentWeather.js';
-// import { useUpdateImage } from '../../hooks/useUpdateImage.js';
+import { useUpdateImage } from '../../hooks/useUpdateImage.js';
 import { useFetchFlag } from '../../hooks/useFetchFlag.js';
-import deleteCity from '../../services/api/deleteCity.js';
+import { deleteCity } from '../../services/api/deleteCity.js';
 import '../../App.scss';
 
 function WeatherCard() {
@@ -17,12 +17,12 @@ function WeatherCard() {
   const [collection, setCollection] = useState([]);
   const { weather, isLoading } = useFetchCurrentWeather(location);
   const { flagImagUrl } = useFetchFlag(weather);
+  const { weatherImage } = useUpdateImage(weather);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   }
 
-  // const { weatherImage } = useUpdateImage(currentWeather);
   useEffect(() => {
     const apiurl = 'http://localhost:3001/api/v1/cities'
 
@@ -96,7 +96,7 @@ function WeatherCard() {
   }
 
   return (
-    <div>
+    <div style={{backgroundImage:`url(${weatherImage})`, backgroundSize: 'cover'}}>
       <SearchBar
         inputValue={inputValue}
         onInputChange={handleInputChange}

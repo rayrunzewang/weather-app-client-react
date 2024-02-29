@@ -1,7 +1,7 @@
 .search-bar__input {
   height: 40px;
   background-color: rgba($color: #ffffff, $alpha: 0.9);
-  width: 150px;
+  width: 300px;
   border: none;
   transition: all ease 0.4s;
   font-size: 18px;
@@ -12,6 +12,6 @@
 }
 
 .search-bar__input:focus {
-  width: 300px;
+  width: 450px;
 }
 

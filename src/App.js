@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import { Layout } from './components/Layout';
 import WeatherCard from './components/WeatherCard'
 import NewsCard from './components/NewsCard'
 

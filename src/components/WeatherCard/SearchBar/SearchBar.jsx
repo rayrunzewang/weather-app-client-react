@@ -2,7 +2,7 @@ import Input from './Input'
 import SearchButton from './SearchButton'
 import './searchBar.scss'
 
-const SearchBar = ({inputValue, onInputChange, onSearch}) => {
+export const SearchBar = ({inputValue, onInputChange, onSearch}) => {
 
   return (
     <div className='search-bar'>
@@ -16,5 +16,3 @@ const SearchBar = ({inputValue, onInputChange, onSearch}) => {
     </div>
   )
 }
-
-export default SearchBar
