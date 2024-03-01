@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Display from './Display';
-import Collection from './Collection';
+import { Collection } from './Collection';
 import { SearchBar } from './SearchBar';
 import { postAddCity } from '../../services/api/weatherApi.js'
 import { fetchCollection } from '../../services/api/fetchCollection.js';
@@ -96,7 +96,7 @@ function WeatherCard() {
   }
 
   return (
-    <div style={{backgroundImage:`url(${weatherImage})`, backgroundSize: 'cover'}}>
+    <div style={{ backgroundImage: `url(${weatherImage})`, backgroundSize: 'cover' }}>
       <SearchBar
         inputValue={inputValue}
         onInputChange={handleInputChange}

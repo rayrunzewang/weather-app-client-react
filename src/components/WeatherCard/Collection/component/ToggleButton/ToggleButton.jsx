@@ -1,7 +1,6 @@
-import React from 'react'
 import './toggleButton.scss'
 
-const ToggleButton = ({ isCollectionVisible, onClick, children }) => {
+export const ToggleButton = ({ isCollectionVisible, onClick, children }) => {
   return (
     <button
       className={`collection__toggle-button ${isCollectionVisible && 'collection__toggle-button--collection-visible'}`}
@@ -9,8 +8,3 @@ const ToggleButton = ({ isCollectionVisible, onClick, children }) => {
     >{children}</button>
   )
 }
-
-export default ToggleButton
-
-
-

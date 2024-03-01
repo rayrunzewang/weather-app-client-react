@@ -16,6 +16,7 @@
   text-decoration: none;
 }
 
-.active-link {
-  text-decoration: undeline;
+.header div a.active {
+  text-decoration: underline;
+  color: orange;
 }

@@ -1,21 +1,28 @@
-import CollectionListContainer from './component/CollectionListContainer/index.jsx'
-import ToggleButton from './component/ToggleButton/index.jsx'
+import { ListContainer } from './component/ListContainer/index.js'
+import { ToggleButton } from './component/ToggleButton'
 import useToggle from './hook/useToggle.js'
 import './collection.scss'
 
-const Collection = ({ isLoading, onItemClick, collection, onDelete }) => {
+export const Collection = ({ isLoading, onItemClick, collection, onDelete }) => {
   const [isCollectionVisible, toggle] = useToggle(true);
 
+  const toggleButtonText = isCollectionVisible ? 'X' : 'Collection';
+
   return (
-    <div className={`collection__ul-container  ${isCollectionVisible && 'collection__ul-container--show'}`} >
+    <div className={`collection-container  ${isCollectionVisible && 'collection-container--show'}`} >
 
-      <CollectionListContainer isLoading={isLoading} collection={collection} onItemClick={onItemClick} onDelete={onDelete} />
+      <ListContainer
+        isLoading={isLoading}
+        collection={collection}
+        onItemClick={onItemClick}
+        onDelete={onDelete}
+      />
       <div className='collection__toggle-container'>
-        <ToggleButton isCollectionVisible={isCollectionVisible} onClick={toggle}>{!isCollectionVisible? 'Collection' : 'X' }</ToggleButton >
+        <ToggleButton
+          isCollectionVisible={isCollectionVisible}
+          onClick={toggle}
+        >{toggleButtonText}</ToggleButton >
       </div>
-
     </div>
   )
 }
-
-export default Collection

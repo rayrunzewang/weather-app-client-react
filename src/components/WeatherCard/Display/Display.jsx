@@ -1,6 +1,6 @@
 import React from 'react'
 import CurrentCity from './CurrentCity'
-import LoadingScreen from '../../loadingScreen/LoadingScreen.jsx';
+import { LoadingScreen } from '../../loadingScreen/LoadingScreen.jsx';
 import './display.scss'
 
 const Display = ({ isLoading, onAdd, weather, flagImagUrl }) => {

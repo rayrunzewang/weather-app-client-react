@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import WeatherCard from './components/WeatherCard'
 import NewsCard from './components/NewsCard'
-
 import './App.scss';
 
 function App() {
-
   return (
     <div className="home__container">
       <Routes>
@@ -22,9 +19,7 @@ function App() {
           {/* <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>
-
     </div>
-
   );
 }
 
